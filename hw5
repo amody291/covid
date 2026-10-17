@@ -1,0 +1,18 @@
+
+import pandas as pd
+
+df = pd.read_csv("housing.csv")
+print(df.info())
+df["total_bedrooms"] = df["total_bedrooms"].fillna(df["total_bedrooms"].mean())
+df["ocean_proximity"] = df["ocean_proximity"].fillna(df["ocean_proximity"].mode()[0])
+
+df = pd.get_dummies(df, columns=["ocean_proximity"], dtype=int)
+
+X = df.drop("median_house_value", axis=1)
+y = df["median_house_value"]
+print(X)
+print("new line")
+print(df.head())
+print(df.isnull().sum())
+print(X.shape)
+print(y.shape)
